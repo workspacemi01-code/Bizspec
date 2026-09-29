@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { academy, services, site } from "@/lib/content";
+import { Logo } from "@/components/brand";
 import { Container } from "@/components/ui";
 
 const company = [
@@ -42,8 +43,8 @@ export function SiteFooter() {
       <Container className="py-14">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-1">
-            <p className="text-lg font-semibold tracking-tight">{site.name}</p>
-            <p className="mt-2 max-w-xs text-sm text-ink-soft">{site.tagline}</p>
+            <Logo size={30} />
+            <p className="mt-4 max-w-xs text-sm text-ink-soft">{site.tagline}</p>
             <p className="mt-4 font-mono text-xs text-ink-muted">
               {site.regions.join(" · ")}
             </p>
@@ -82,6 +83,16 @@ export function SiteFooter() {
             <li>
               <a href={`mailto:${site.email}`} className="text-sm text-ink-soft hover:text-ink">
                 {site.email}
+              </a>
+            </li>
+            <li>
+              <a
+                href={`https://wa.me/${site.whatsapp.replace(/\D/g, "")}`}
+                className="text-sm text-ink-soft hover:text-ink"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                {site.phone}
               </a>
             </li>
           </Column>

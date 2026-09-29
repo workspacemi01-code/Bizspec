@@ -17,28 +17,39 @@ export function Section({
   className = "",
   tone = "paper",
   id,
+  blueprint = false,
 }: {
   children: ReactNode;
   className?: string;
   tone?: "paper" | "surface" | "ink";
   id?: string;
+  /** Lays the hairline grid under the section. For a couple of sections only —
+   *  a texture on every surface stops being a texture. */
+  blueprint?: boolean;
 }) {
   const tones = {
     paper: "bg-paper text-ink",
     surface: "bg-surface text-ink",
-    ink: "bg-ink text-white",
+    ink: "bg-brand-navy text-white",
   };
+  const grid = blueprint ? (tone === "ink" ? "blueprint blueprint-ink" : "blueprint") : "";
   return (
-    <section id={id} className={`${tones[tone]} py-16 sm:py-24 ${className}`}>
+    <section id={id} className={`${tones[tone]} ${grid} py-16 sm:py-24 ${className}`}>
       <Container>{children}</Container>
     </section>
   );
 }
 
 /** A small label above a heading. Uppercase mono, used sparingly. */
-export function Eyebrow({ children }: { children: ReactNode }) {
+export function Eyebrow({ children, onInk = false }: { children: ReactNode; onInk?: boolean }) {
   return (
-    <p className="font-mono text-xs tracking-[0.14em] text-brand uppercase">{children}</p>
+    <p
+      className={`font-mono text-xs tracking-[0.14em] uppercase ${
+        onInk ? "text-white/60" : "text-brand"
+      }`}
+    >
+      {children}
+    </p>
   );
 }
 
@@ -56,7 +67,10 @@ export function SectionHead({
   return (
     <div className={`max-w-2xl ${align === "center" ? "mx-auto text-center" : ""}`}>
       {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-      <h2 className="mt-3 text-h2 font-semibold text-balance">{title}</h2>
+      {/* The measurement rule: a node where the dimension starts, then the
+          line. Borrowed from a drawing, and it gives the eyebrow a floor. */}
+      {eyebrow && align === "left" && <div className="dim-rule mt-3 w-24" />}
+      <h2 className="mt-4 text-h2 font-semibold text-balance">{title}</h2>
       {lead && <p className="mt-4 text-lead text-ink-soft">{lead}</p>}
     </div>
   );
@@ -94,15 +108,24 @@ export function Card({
   className = "",
   as: Tag = "div",
   id,
+  ticked = false,
 }: {
   children: ReactNode;
   className?: string;
   as?: "div" | "li" | "article";
   /** So a card can be linked to directly. */
   id?: string;
+  /** Registration marks in two corners, revealed on hover. Reserved for cards
+   *  that are an actual choice the visitor makes, not every box on the page. */
+  ticked?: boolean;
 }) {
   return (
-    <Tag id={id} className={`rounded-lg border border-line bg-paper p-6 ${className}`}>
+    <Tag
+      id={id}
+      className={`rounded-md border border-line bg-paper p-6 ${
+        ticked ? "ticked transition-colors hover:border-line-strong" : ""
+      } ${className}`}
+    >
       {children}
     </Tag>
   );

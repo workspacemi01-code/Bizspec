@@ -4,7 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { nav, site } from "@/lib/content";
+import { nav } from "@/lib/content";
+import { Logo } from "@/components/brand";
 import { ButtonLink, Container } from "@/components/ui";
 
 /**
@@ -41,8 +42,8 @@ export function SiteNav() {
     <header className="sticky top-0 z-50 border-b border-line bg-paper/95 backdrop-blur-sm">
       <Container>
         <div className="flex h-16 items-center justify-between gap-4">
-          <Link href="/" className="text-lg font-semibold tracking-tight">
-            {site.name}
+          <Link href="/" aria-label="Bizspec — home" className="shrink-0">
+            <Logo size={30} />
           </Link>
 
           <nav aria-label="Main" className="hidden items-center gap-1 md:flex">

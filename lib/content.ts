@@ -17,9 +17,12 @@ export const site = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://bizspec.co",
   description:
     "Bizspec helps businesses implement technology, build digital products, improve e-commerce operations and deploy practical business systems.",
-  /** Placeholders until the business addresses are confirmed — see README. */
-  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "hello@bizspec.co",
-  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP ?? "",
+  /** Interim address and number, to be swapped for the official ones. Both
+   *  are overridable by environment so that swap needs no code change. */
+  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "bizspec.org@gmail.com",
+  phone: process.env.NEXT_PUBLIC_PHONE ?? "+234 703 559 9433",
+  /** Digits only, the form wa.me expects. */
+  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP ?? "2347035599433",
   linkedin: process.env.NEXT_PUBLIC_LINKEDIN ?? "",
   regions: ["Nigeria", "Africa", "United Kingdom"],
 } as const;

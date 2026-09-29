@@ -20,6 +20,7 @@ import {
   howWeWork,
   products,
   services,
+  site,
   zoho,
 } from "@/lib/content";
 
@@ -33,26 +34,43 @@ import {
 export default function HomePage() {
   return (
     <>
-      <Container className="py-16 sm:py-24">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_1fr]">
-          <div>
-            <h1 className="text-display font-semibold text-balance">{hero.headline}</h1>
-            <p className="mt-6 max-w-xl text-lead text-ink-soft">{hero.lead}</p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <ButtonLink href={hero.primary.href}>{hero.primary.label}</ButtonLink>
-              <ButtonLink href={hero.secondary.href} variant="secondary">
-                {hero.secondary.label}
-              </ButtonLink>
+      {/* The hero sits on the drawing grid: the page opens on a specification,
+          which is the company's name and its actual argument. */}
+      <div className="blueprint border-b border-line">
+        <Container className="py-16 sm:py-24">
+          <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_1fr]">
+            <div>
+              <p className="font-mono text-xs tracking-[0.14em] text-brand uppercase">
+                {site.regions.join(" / ")}
+              </p>
+              <h1 className="mt-5 text-display font-bold text-balance">{hero.headline}</h1>
+              <p className="mt-6 max-w-xl text-lead text-ink-soft">{hero.lead}</p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <ButtonLink href={hero.primary.href}>{hero.primary.label}</ButtonLink>
+                <ButtonLink href={hero.secondary.href} variant="secondary">
+                  {hero.secondary.label}
+                </ButtonLink>
+              </div>
+
+              {/* The legend to the drawing beside it — four marks, four
+                  labels, the way a plan explains its own symbols. */}
+              <ul className="mt-10 grid max-w-xl grid-cols-2 gap-x-6 gap-y-3 border-t border-line pt-6 sm:grid-cols-4">
+                {hero.trust.map((item) => (
+                  <li key={item} className="flex items-start gap-2">
+                    <span aria-hidden className="mt-[3px] size-2 shrink-0 bg-brand" />
+                    <span className="font-mono text-[11px] leading-tight tracking-[0.06em] text-ink-muted uppercase">
+                      {item}
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <p className="mt-8 font-mono text-xs tracking-[0.1em] text-ink-muted uppercase">
-              {hero.trust.join(" • ")}
-            </p>
+            <div>
+              <SystemDiagram className="mx-auto w-full max-w-sm" />
+            </div>
           </div>
-          <div className="order-first lg:order-last">
-            <SystemDiagram className="mx-auto w-full max-w-sm" />
-          </div>
-        </div>
-      </Container>
+        </Container>
+      </div>
 
       <Section tone="surface" id="needs">
         <SectionHead
@@ -62,7 +80,7 @@ export default function HomePage() {
         />
         <ul className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {needs.map((need) => (
-            <Card as="li" key={need.title} className="flex flex-col">
+            <Card as="li" key={need.title} ticked className="flex flex-col">
               <h3 className="text-base font-semibold">{need.title}</h3>
               <p className="mt-2 flex-1 text-sm text-ink-soft">{need.body}</p>
               <Link
@@ -103,9 +121,9 @@ export default function HomePage() {
         </div>
       </Section>
 
-      <Section tone="ink">
+      <Section tone="ink" blueprint>
         <div className="max-w-2xl">
-          <Eyebrow>Why Bizspec</Eyebrow>
+          <Eyebrow onInk>Why Bizspec</Eyebrow>
           <h2 className="mt-3 text-h2 font-semibold text-balance">
             We don&apos;t just build software. We understand the business behind it.
           </h2>
@@ -141,7 +159,7 @@ export default function HomePage() {
         />
         <ul className="mt-10 grid gap-4 sm:grid-cols-2">
           {products.map((product) => (
-            <Card as="li" key={product.name} className="flex flex-col">
+            <Card as="li" key={product.name} ticked className="flex flex-col">
               <div className="flex items-start justify-between gap-4">
                 <h3 className="text-base font-semibold">{product.name}</h3>
                 <span className="shrink-0 rounded-full bg-brand-tint px-2.5 py-1 font-mono text-[11px] text-brand-deep">
@@ -234,7 +252,7 @@ export default function HomePage() {
         </div>
       </Section>
 
-      <Section tone="ink">
+      <Section tone="ink" blueprint>
         <div className="max-w-2xl">
           <h2 className="text-h2 font-semibold text-balance">{closingCta.headline}</h2>
           <p className="mt-4 text-lead text-white/70">{closingCta.lead}</p>

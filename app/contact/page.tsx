@@ -48,7 +48,7 @@ export default async function ContactPage(props: PageProps<"/contact">) {
             {site.whatsapp && (
               <div>
                 <dt className="font-mono text-xs tracking-[0.14em] text-ink-muted uppercase">
-                  WhatsApp
+                  Phone / WhatsApp
                 </dt>
                 <dd className="mt-1">
                   <a
@@ -57,7 +57,7 @@ export default async function ContactPage(props: PageProps<"/contact">) {
                     rel="noopener noreferrer"
                     target="_blank"
                   >
-                    {site.whatsapp}
+                    {site.phone}
                   </a>
                 </dd>
               </div>

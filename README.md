@@ -74,3 +74,17 @@ lib/content.ts      every word on the site
 certification, partnership, metric, testimonial or product feature that has not
 been confirmed. Where something is unknown it carries a `[TO BE ADDED]`
 placeholder, which is deliberate and should be replaced rather than deleted.
+
+
+## Environment
+
+Copy `.env.example` to `.env.local`. `.env*` is gitignored, so no real value is
+ever committed.
+
+The one that matters for launch is `RESEND_API_KEY` — without it the enquiry
+form validates and rate-limits but delivers nothing. With it, enquiries arrive
+at `CONTACT_TO` and replying in the inbox goes back to the enquirer.
+
+Resend's shared sender (`onboarding@resend.dev`) works with no domain setup but
+only delivers to the address that owns the Resend account, which is fine to
+start. Once a domain is verified there, set `CONTACT_FROM` to an address on it.
