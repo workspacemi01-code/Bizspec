@@ -189,43 +189,70 @@ export const howWeWork = [
 ] as const;
 
 /** Descriptions stay at what has been confirmed. No invented features. */
+/**
+ * The product list.
+ *
+ * Name, category and what it does \u2014 no status badge and no link, because a
+ * "Live" chip over a link that goes nowhere is the one thing on a site that
+ * loses a reader at the moment they click. Each product gets a link and a
+ * screenshot when it has somewhere real to point.
+ */
 export const products = [
   {
     name: "Styles2Fit",
     category: "Fashion technology",
-    status: "Live",
     body: "An AI-enabled fashion platform connecting fashion businesses and customers.",
-    href: "/products#styles2fit",
   },
   {
     name: "Space Booking System",
     category: "Booking & reservations",
-    status: "Live",
     body: "A digital platform for managing spaces, bookings and reservations.",
-    href: "/products#space-booking",
   },
   {
     name: "Budgeting System",
     category: "Finance & planning",
-    status: "Live",
     body: "A practical budgeting and financial planning platform.",
-    href: "/products#budgeting",
   },
   {
     name: "Bummitestore",
     category: "E-commerce",
-    status: "Live",
     body: "An e-commerce platform.",
-    href: "/products#bummitestore",
   },
 ] as const;
 
 /** Only clients we may name publicly. No metrics, logos or outcomes invented. */
-export const clients = [
-  { name: "David Wej", region: "Nigeria", work: "Zoho and business systems support." },
-  { name: "Marsden", region: "Nigeria", work: "Zoho and business systems support." },
-  { name: "Promenadeshirts", region: "United Kingdom", work: "Zoho and business systems support." },
-] as const;
+/**
+ * Client work, shown without naming anyone.
+ *
+ * Nothing here identifies a business, so no permission is needed to publish
+ * it and no confidence is broken. Everything stated is true of the engagements
+ * as they stand; a named case study can replace this later, with consent.
+ */
+export const clientWork = {
+  headline: "Businesses we support on Zoho",
+  lead: "We work with retail, apparel and services businesses across Nigeria and the United Kingdom. We do not publish client names \u2014 references are shared privately, with the client's permission, once a conversation is serious.",
+  /**
+   * Figures that are counted, not claimed. Confirm before changing:
+   *  3 = businesses currently on ongoing support
+   *  2 = Nigeria and the United Kingdom
+   *  6 = the Zoho applications listed under our Zoho service, i.e. what we
+   *      implement \u2014 not a count of what any one client runs
+   */
+  facts: [
+    { value: "3", label: "businesses on ongoing support" },
+    { value: "2", label: "countries" },
+    { value: "6", label: "Zoho applications we implement" },
+  ],
+  /** What the engagements actually consist of. */
+  disciplines: [
+    "Zoho CRM configured around an existing sales process",
+    "Zoho Books and Inventory kept in step with each other",
+    "Migration from spreadsheets and disconnected tools",
+    "Integration between Zoho and an online store",
+    "Team training, so the system survives the handover",
+    "Ongoing support once the implementation is done",
+  ],
+} as const;
 
 export const zoho = {
   headline: "Make Zoho work for your business",

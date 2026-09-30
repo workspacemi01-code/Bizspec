@@ -65,11 +65,13 @@ export default function Page() {
         again on your next visit.
       </p>
 
-      <h2 className="mt-12 text-h2 font-semibold">The formal policy</h2>
-      <p className="mt-4 max-w-2xl text-sm text-ink-muted">
-        [FORMAL COOKIE POLICY WORDING TO BE ADDED — retention periods, legal basis and the
-        responsible entity must be confirmed by {site.name} before this section is
-        published.] For any question in the meantime, write to{" "}
+      <h2 className="mt-12 text-h2 font-semibold">Questions</h2>
+      <p className="mt-4 max-w-2xl text-sm text-ink-soft">
+        How we handle personal information more generally is set out in our{" "}
+        <a href="/privacy" className="text-brand hover:underline">
+          privacy policy
+        </a>
+        . For anything else, write to{" "}
         <a href={`mailto:${site.email}`} className="text-brand hover:underline">
           {site.email}
         </a>

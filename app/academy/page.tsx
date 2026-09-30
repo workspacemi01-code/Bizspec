@@ -39,9 +39,6 @@ export default function AcademyPage() {
             <Card as="li" key={course.title}>
               <h2 className="text-base font-semibold">{course.title}</h2>
               <p className="mt-2 text-sm text-ink-soft">{course.body}</p>
-              <p className="mt-4 font-mono text-[11px] text-ink-muted">
-                [FORMAT, DURATION AND FEE TO BE ADDED]
-              </p>
             </Card>
           ))}
         </ul>

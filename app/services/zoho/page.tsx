@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { ButtonLink, Card, Container, Section, SectionHead } from "@/components/ui";
-import { clients, zoho } from "@/lib/content";
+import { clientWork, zoho } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Zoho Implementation & Support",
@@ -54,23 +54,28 @@ export default function ZohoPage() {
       <Section>
         <SectionHead
           eyebrow="Client work"
-          title="Businesses we support on Zoho"
-          lead="Shown with permission. Detailed case studies are in preparation."
+          title={clientWork.headline}
+          lead={clientWork.lead}
         />
-        <ul className="mt-10 grid gap-4 sm:grid-cols-3">
-          {clients.map((client) => (
-            <Card as="li" key={client.name}>
-              <h3 className="text-base font-semibold">{client.name}</h3>
-              <p className="mt-1 font-mono text-xs text-ink-muted">{client.region}</p>
-              <p className="mt-3 text-sm text-ink-soft">{client.work}</p>
-            </Card>
+        <dl className="mt-10 grid grid-cols-3 gap-4 border-y border-line py-8">
+          {clientWork.facts.map((f) => (
+            <div key={f.label}>
+              <dt className="sr-only">{f.label}</dt>
+              <dd>
+                <span className="font-display text-h2 font-bold text-brand">{f.value}</span>
+                <span className="mt-1 block text-sm text-ink-soft">{f.label}</span>
+              </dd>
+            </div>
+          ))}
+        </dl>
+        <ul className="mt-8 grid gap-x-10 gap-y-3 sm:grid-cols-2">
+          {clientWork.disciplines.map((item) => (
+            <li key={item} className="flex gap-2.5 text-sm text-ink-soft">
+              <span aria-hidden className="mt-2 size-1 shrink-0 rounded-full bg-brand" />
+              {item}
+            </li>
           ))}
         </ul>
-        {/* Partner and certification claims stay off the site until the status
-            is verified and current. */}
-        <p className="mt-6 max-w-2xl text-sm text-ink-muted">
-          [ZOHO PARTNER STATUS TO BE CONFIRMED BEFORE ANY CERTIFICATION IS SHOWN]
-        </p>
       </Section>
     </>
   );

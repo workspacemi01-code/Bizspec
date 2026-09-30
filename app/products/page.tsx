@@ -10,9 +10,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "/products" },
 };
 
-/** Ids match the anchors the homepage cards link to. */
-const anchor = (href: string) => href.split("#")[1] ?? "";
-
 export default function ProductsPage() {
   return (
     <>
@@ -30,19 +27,10 @@ export default function ProductsPage() {
       <Section tone="surface">
         <ul className="grid gap-4 sm:grid-cols-2">
           {products.map((product) => (
-            <Card as="li" key={product.name} id={anchor(product.href)} className="scroll-mt-20">
-              <div className="flex items-start justify-between gap-4">
-                <h2 className="text-base font-semibold">{product.name}</h2>
-                <span className="shrink-0 rounded-full bg-brand-tint px-2.5 py-1 font-mono text-[11px] text-brand-deep">
-                  {product.status}
-                </span>
-              </div>
+            <Card as="li" key={product.name}>
+              <h2 className="text-base font-semibold">{product.name}</h2>
               <p className="mt-1 font-mono text-xs text-ink-muted">{product.category}</p>
               <p className="mt-3 text-sm text-ink-soft">{product.body}</p>
-              {/* No feature list until each product's detail is confirmed. */}
-              <p className="mt-4 text-xs text-ink-muted">
-                [PRODUCT DETAIL AND SCREENSHOT TO BE ADDED]
-              </p>
             </Card>
           ))}
         </ul>

@@ -12,7 +12,7 @@ import {
 } from "@/components/ui";
 import {
   academy,
-  clients,
+  clientWork,
   closingCta,
   differentiators,
   hero,
@@ -159,46 +159,39 @@ export default function HomePage() {
         />
         <ul className="mt-10 grid gap-4 sm:grid-cols-2">
           {products.map((product) => (
-            <Card as="li" key={product.name} ticked className="flex flex-col">
-              <div className="flex items-start justify-between gap-4">
-                <h3 className="text-base font-semibold">{product.name}</h3>
-                <span className="shrink-0 rounded-full bg-brand-tint px-2.5 py-1 font-mono text-[11px] text-brand-deep">
-                  {product.status}
-                </span>
-              </div>
+            <Card as="li" key={product.name} className="flex flex-col">
+              <h3 className="text-base font-semibold">{product.name}</h3>
               <p className="mt-1 font-mono text-xs text-ink-muted">{product.category}</p>
-              <p className="mt-3 flex-1 text-sm text-ink-soft">{product.body}</p>
-              <Link
-                href={product.href}
-                className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-brand hover:underline"
-              >
-                View product
-                <Arrow />
-              </Link>
+              <p className="mt-3 text-sm text-ink-soft">{product.body}</p>
             </Card>
           ))}
         </ul>
       </Section>
 
       <Section tone="surface">
-        <SectionHead
-          eyebrow="Client work"
-          title="Technology built around real business needs"
-          lead="A selection of clients we work with, shown with their permission."
-        />
-        <ul className="mt-10 grid gap-4 sm:grid-cols-3">
-          {clients.map((client) => (
-            <Card as="li" key={client.name}>
-              <h3 className="text-base font-semibold">{client.name}</h3>
-              <p className="mt-1 font-mono text-xs text-ink-muted">{client.region}</p>
-              <p className="mt-3 text-sm text-ink-soft">{client.work}</p>
-            </Card>
+        <SectionHead eyebrow="Client work" title={clientWork.headline} lead={clientWork.lead} />
+
+        {/* Counted, not claimed — three numbers that are simply true. */}
+        <dl className="mt-10 grid grid-cols-3 gap-4 border-y border-line py-8">
+          {clientWork.facts.map((f) => (
+            <div key={f.label}>
+              <dt className="sr-only">{f.label}</dt>
+              <dd>
+                <span className="font-display text-h2 font-bold text-brand">{f.value}</span>
+                <span className="mt-1 block text-sm text-ink-soft">{f.label}</span>
+              </dd>
+            </div>
+          ))}
+        </dl>
+
+        <ul className="mt-8 grid gap-x-10 gap-y-3 sm:grid-cols-2">
+          {clientWork.disciplines.map((item) => (
+            <li key={item} className="flex gap-2.5 text-sm text-ink-soft">
+              <span aria-hidden className="mt-2 size-1 shrink-0 rounded-full bg-brand" />
+              {item}
+            </li>
           ))}
         </ul>
-        <p className="mt-6 max-w-2xl text-sm text-ink-muted">
-          Detailed case studies — challenge, solution, technology and outcome — are being
-          prepared with each client. [CASE STUDY DETAIL TO BE ADDED]
-        </p>
       </Section>
 
       <Section id="zoho">
