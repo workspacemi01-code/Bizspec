@@ -131,6 +131,39 @@ export function Card({
   );
 }
 
+/**
+ * A short run of figures.
+ *
+ * Three columns works on a wide screen and falls apart on a phone, where each
+ * label gets a narrow column and wraps to three ragged lines. So below `sm`
+ * these become rows — figure left, label beside it, a hairline between — which
+ * is how a phone wants to read a short list anyway.
+ */
+export function Facts({
+  items,
+}: {
+  items: readonly { value: string; label: string }[];
+}) {
+  return (
+    <dl className="mt-10 divide-y divide-line border-y border-line sm:grid sm:grid-cols-3 sm:gap-6 sm:divide-y-0 sm:py-8">
+      {items.map((item) => (
+        <div key={item.label} className="py-4 sm:py-0">
+          <dt className="sr-only">{item.label}</dt>
+          <dd className="flex items-baseline gap-3 sm:block">
+            <span className="font-display text-h2 font-bold text-brand tabular-nums">
+              {item.value}
+            </span>
+            {/* Hidden from assistive tech: the <dt> above already says it. */}
+            <span aria-hidden className="text-sm text-ink-soft sm:mt-1 sm:block">
+              {item.label}
+            </span>
+          </dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
 /** A plain arrow, so a link that leads somewhere says so without an icon set. */
 export function Arrow({ className = "" }: { className?: string }) {
   return (

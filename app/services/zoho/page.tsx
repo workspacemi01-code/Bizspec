@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { ButtonLink, Card, Container, Section, SectionHead } from "@/components/ui";
+import { ButtonLink, Card, Container, Facts, Section, SectionHead } from "@/components/ui";
 import { clientWork, zoho } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -57,17 +57,7 @@ export default function ZohoPage() {
           title={clientWork.headline}
           lead={clientWork.lead}
         />
-        <dl className="mt-10 grid grid-cols-3 gap-4 border-y border-line py-8">
-          {clientWork.facts.map((f) => (
-            <div key={f.label}>
-              <dt className="sr-only">{f.label}</dt>
-              <dd>
-                <span className="font-display text-h2 font-bold text-brand">{f.value}</span>
-                <span className="mt-1 block text-sm text-ink-soft">{f.label}</span>
-              </dd>
-            </div>
-          ))}
-        </dl>
+        <Facts items={clientWork.facts} />
         <ul className="mt-8 grid gap-x-10 gap-y-3 sm:grid-cols-2">
           {clientWork.disciplines.map((item) => (
             <li key={item} className="flex gap-2.5 text-sm text-ink-soft">
