@@ -174,6 +174,17 @@ async function deliver(enquiry: Enquiry): Promise<"sent" | "skipped" | "failed">
       )}</div>
     </div>`;
 
+  /* A plain-text alternative alongside the HTML. Spam filters mark down
+     HTML-only mail, and some clients show nothing useful without it. */
+  const text = [
+    "New enquiry from the website",
+    "",
+    ...rows.map(([k, v]) => `${k}: ${v}`),
+    "",
+    "Message:",
+    enquiry.message,
+  ].join("\n");
+
   try {
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -186,6 +197,7 @@ async function deliver(enquiry: Enquiry): Promise<"sent" | "skipped" | "failed">
         reply_to: enquiry.email,
         subject: `Website enquiry — ${enquiry.name}${enquiry.topic ? ` (${enquiry.topic})` : ""}`,
         html,
+        text,
       }),
       signal: AbortSignal.timeout(10_000),
     });
