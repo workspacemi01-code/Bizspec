@@ -15,6 +15,24 @@ import { contactTopics } from "@/lib/content";
  * `topic` can be pre-selected from the query string, so "Talk to a Zoho
  * specialist" arrives with Zoho already chosen.
  */
+/**
+ * Bring a result into view the moment it appears.
+ *
+ * The form is long, so on a phone the answer — thank-you or error — lands
+ * above or below where the person is actually looking, and it reads as
+ * nothing having happened. A callback ref does this on mount, which needs no
+ * effect: React calls it with the node exactly once, when it exists.
+ *
+ * Focus moves too, so a screen reader announces it rather than leaving the
+ * user in a form that has quietly vanished.
+ */
+function revealOnMount(node: HTMLDivElement | null) {
+  if (!node) return;
+  node.focus({ preventScroll: true });
+  const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  node.scrollIntoView({ behavior: still ? "auto" : "smooth", block: "center" });
+}
+
 export function ContactForm({ initialTopic = "" }: { initialTopic?: string }) {
   const [state, setState] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [message, setMessage] = useState<string | null>(null);
@@ -49,6 +67,8 @@ export function ContactForm({ initialTopic = "" }: { initialTopic?: string }) {
   if (state === "sent") {
     return (
       <div
+        ref={revealOnMount}
+        tabIndex={-1}
         role="status"
         className="rounded-lg border border-line bg-surface p-8 text-center"
       >
@@ -109,9 +129,14 @@ export function ContactForm({ initialTopic = "" }: { initialTopic?: string }) {
       </div>
 
       {message && (
-        <p role="alert" className="rounded-md bg-danger-tint px-3 py-2 text-sm text-danger">
+        <div
+          ref={revealOnMount}
+          tabIndex={-1}
+          role="alert"
+          className="rounded-md bg-danger-tint px-3 py-2 text-sm text-danger"
+        >
           {message}
-        </p>
+        </div>
       )}
 
       <Button type="submit" disabled={state === "sending"}>
